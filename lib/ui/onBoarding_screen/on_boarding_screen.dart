@@ -1,10 +1,11 @@
+import 'package:e_commerce/shared/funs.dart';
+import 'package:e_commerce/ui/login/login_screen.dart';
 import 'package:e_commerce/ui/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 Widget onBoardingPage(OnBoardingModel onBoardingModel) {
-
   return Container(
     padding: EdgeInsets.all(16),
     width: double.infinity,
@@ -37,7 +38,6 @@ Widget onBoardingPage(OnBoardingModel onBoardingModel) {
 }
 
 class OnBoardingModel {
-
   final String image;
   final String title;
   final String description;
@@ -47,19 +47,16 @@ class OnBoardingModel {
 }
 
 class OnBoardingScreen extends StatefulWidget {
-
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-
   var boardController = PageController();
 
   var isLast = false;
 
   List<OnBoardingModel> boardings = [
-
     OnBoardingModel(
         image: 'assets/illustrations/shopping.svg',
         title: 'Easy Shopping Experience',
@@ -80,7 +77,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          actions: [
+            TextButton(
+              onPressed: () {
+                onSkipBoarding(context, LoginScreen());
+              },
+              child: Text(
+                'Skip',
+                style: TextStyle(color: cabaret, fontSize: 18),
+              ),
+            )
+          ],
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -120,7 +129,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   FloatingActionButton(
                     onPressed: () {
                       if (isLast) {
-                        navigateTo(context, HomeScreen());
+                        onSkipBoarding(context, LoginScreen());
                       }
                       boardController.nextPage(
                           duration: Duration(milliseconds: 300),

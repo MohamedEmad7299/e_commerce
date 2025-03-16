@@ -1,0 +1,39 @@
+class UserData {
+
+  String? name;
+  String? email;
+  String? phone;
+  int? id;
+  String? image;
+  String? token;
+
+  UserData({
+      this.name, 
+      this.email, 
+      this.phone, 
+      this.id, 
+      this.image, 
+      this.token,});
+
+  UserData.fromJson(dynamic json) {
+    name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
+    id = json['id'];
+    image = json['image'];
+    token = json['token'];
+  }
+
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['name'] = name;
+    map['email'] = email;
+    map['phone'] = phone;
+    map['id'] = id;
+    map['image'] = image;
+    map['token'] = token;
+    return map;
+  }
+
+}
