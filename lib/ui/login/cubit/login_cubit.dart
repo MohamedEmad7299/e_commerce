@@ -4,7 +4,7 @@ import 'package:e_commerce/network/end_points.dart';
 import 'package:e_commerce/ui/login/cubit/states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/models/login_models/login_model.dart';
+import '../../../network/models/login_models/login_model.dart';
 
 class LoginCubit extends Cubit<LoginState> {
 

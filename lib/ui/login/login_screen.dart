@@ -12,10 +12,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/states.dart';
 
 class LoginScreen extends StatelessWidget {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
 
-  var formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +72,7 @@ class LoginScreen extends StatelessWidget {
                         if (value.isEmpty) {
                           return 'Email must not be empty';
                         }
+                        return null;
                       },
                       prefixIcon: Icons.email,
                       label: 'Email',
@@ -85,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                         if (value.isEmpty) {
                           return 'Password must not be empty';
                         }
+                        return null;
                       },
                       isPassword: cubit.isPassword,
                       suffixIconPressed: () {

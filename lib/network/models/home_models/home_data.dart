@@ -1,10 +1,10 @@
 import 'Banners.dart';
-import 'Products.dart';
+import 'Product.dart';
 
 class HomeData {
 
   List<Banners>? banners;
-  List<Products>? products;
+  List<Product>? products;
   dynamic ad;
 
   HomeData({
@@ -22,7 +22,7 @@ class HomeData {
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
-        products?.add(Products.fromJson(v));
+        products?.add(Product.fromJson(v));
       });
     }
     ad = json['ad'];

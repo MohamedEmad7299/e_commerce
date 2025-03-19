@@ -1,4 +1,4 @@
-class Products {
+class Product {
 
 
   dynamic id;
@@ -12,7 +12,7 @@ class Products {
   dynamic inFavorites;
   dynamic inCart;
 
-  Products({
+  Product({
       this.id, 
       this.price, 
       this.oldPrice, 
@@ -24,7 +24,7 @@ class Products {
       this.inFavorites, 
       this.inCart,});
 
-  Products.fromJson(dynamic json) {
+  Product.fromJson(dynamic json) {
     id = json['id'];
     price = json['price'];
     oldPrice = json['old_price'];

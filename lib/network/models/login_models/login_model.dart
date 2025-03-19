@@ -1,6 +1,8 @@
 
 
-import 'package:e_commerce/data/models/login_models/user_data.dart';
+
+
+import 'package:e_commerce/network/models/login_models/user_data.dart';
 
 class LoginModel {
 
