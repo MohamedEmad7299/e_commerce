@@ -1,16 +1,25 @@
-# e_commerce
+# 🛍️ Flutter E-Commerce App
 
-A new Flutter project.
+Welcome to the **Flutter E-Commerce App** – a modern, feature-rich shopping application built using Flutter. This app provides a seamless shopping experience with features like product browsing.
 
-## Getting Started
+## 📸 Screenshots
 
-This project is a starting point for a Flutter application.
+[1](./assets/images/1.jpg)
+[2](./assets/images/2.jpg)
+[3](./assets/images/3.jpg)
+[4](./assets/images/4.jpg)
+[5](./assets/images/5.jpg)
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🛒 **Product Listing & Details** – Browse products with descriptions and images.
+- 🔍 **Search & Filter** – Easily find products with smart search.
+- 🔐 **User Authentication** – Sign up, login, and manage profiles.
+- 🎨 **Beautiful UI** – Designed using Flutter with Material and Cupertino widgets.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏗️ Tech Stack
+
+- **Flutter** (Dart) – Frontend UI development
+- **Bloc** – State management
+- **Dio** – API integration
+- **SharedPreferences** – Local storage
