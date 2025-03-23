@@ -9,6 +9,7 @@ import 'package:e_commerce/ui/widgets/default_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../shared/consts.dart';
 import 'cubit/states.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -18,16 +19,20 @@ class LoginScreen extends StatelessWidget {
 
   final formKey = GlobalKey<FormState>();
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
+
         if (state is LoginSuccessState) {
 
           if (state.loginResponse.status!) {
             CacheHelper.saveData(key: 'token', value: state.loginResponse.data!.token).then((value) {
               if (value!) {
+                token = state.loginResponse.data!.token!;
                 navigateAndReplacement(context, HomeScreen());
               }
             });
@@ -134,7 +139,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: 16,
                     ),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

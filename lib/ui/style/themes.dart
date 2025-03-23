@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 ThemeData lightTheme() {
-
-
   return ThemeData(
     indicatorColor: cabaret,
-    progressIndicatorTheme: ProgressIndicatorThemeData(color: cabaret),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: cabaret,
+        linearTrackColor: cabaret75
+    ),
     textSelectionTheme: TextSelectionThemeData(
       selectionColor: cabaret75,
       selectionHandleColor: cabaret,
@@ -45,7 +46,6 @@ ThemeData lightTheme() {
 
 
 ThemeData darkTheme() {
-
   return ThemeData(
       iconTheme: IconThemeData(
           color: Colors.white

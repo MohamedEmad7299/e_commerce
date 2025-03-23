@@ -1,4 +1,5 @@
 import 'package:e_commerce/data/cache_helper/cache_helper.dart';
+import 'package:e_commerce/ui/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void navigateTo(context, widget) {
@@ -25,6 +26,17 @@ void onSkipBoarding(context, widget) {
     (value) {
       if (value!) {
         navigateAndReplacement(context, widget);
+      }
+    },
+  );
+}
+
+
+void signOut(context) {
+  CacheHelper.removeData(key: 'token').then(
+        (value) {
+      if (value) {
+        navigateAndReplacement(context, LoginScreen());
       }
     },
   );

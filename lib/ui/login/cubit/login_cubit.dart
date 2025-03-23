@@ -1,6 +1,7 @@
 import 'package:e_commerce/data/cache_helper/cache_helper.dart';
 import 'package:e_commerce/network/dio_helper.dart';
 import 'package:e_commerce/network/end_points.dart';
+import 'package:e_commerce/shared/consts.dart';
 import 'package:e_commerce/ui/login/cubit/states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,6 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
     }).then((value) {
       loginResponse = LoginModel.fromJson(value.data);
       CacheHelper.saveData(key: 'token', value: loginResponse!.data!.token).then((value) {
+        token = loginResponse!.data!.token!;
         if (value!) {
           emit(LoginSuccessState(loginResponse!));
         }

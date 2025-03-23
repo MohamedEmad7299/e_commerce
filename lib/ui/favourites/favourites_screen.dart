@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritesScreen extends StatelessWidget {
+
+  const FavoritesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+
     return BlocConsumer<HomeCubit, HomeState>(
       builder: (context, state) {
         var cubit = HomeCubit.get(context);

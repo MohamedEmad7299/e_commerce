@@ -1,13 +1,14 @@
 import 'package:e_commerce/network/dio_helper.dart';
 import 'package:e_commerce/network/end_points.dart';
 import 'package:e_commerce/network/models/favourites_models/FavouritesModel.dart';
+import 'package:e_commerce/network/models/profile_model/ProfileModel.dart';
+import 'package:e_commerce/network/models/update_profile_models/update_profile_model.dart';
 import 'package:e_commerce/shared/consts.dart';
 import 'package:e_commerce/ui/categories/categories_screen.dart';
 import 'package:e_commerce/ui/favourites/favourites_screen.dart';
 import 'package:e_commerce/ui/settings/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../network/models/home_models/HomeModel.dart';
 import '../network/models/categories_models/categories_model.dart';
 import '../ui/products/products_screen.dart';
@@ -37,7 +38,6 @@ class HomeCubit extends Cubit<HomeState> {
   Map<int, bool> favourites = {};
 
   void getHomeData() {
-
     emit(HomeLoadingState());
 
     DioHelper.getData(path: HOME, token: token).then(
@@ -62,9 +62,8 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void getCategoriesData() {
-
     DioHelper.getData(path: CATEGORIES).then(
-          (value) {
+      (value) {
         categoriesModel = CategoriesModel.fromJson(value.data);
         emit(CategoriesSuccessState());
       },
@@ -76,7 +75,6 @@ class HomeCubit extends Cubit<HomeState> {
   FavouritesModel? favouritesModel;
 
   void updateFavourites(int productId) {
-
     favourites[productId] = !favourites[productId]!;
     emit(FavoritesChangeState());
 
@@ -86,22 +84,69 @@ class HomeCubit extends Cubit<HomeState> {
       data: {
         'product_id': productId,
       },
-    ).then((value) {
+    ).then(
+      (value) {
 
-      errorShown = false;
+        errorShown = false;
 
-      favouritesModel = FavouritesModel.fromJson(value.data);
+        favouritesModel = FavouritesModel.fromJson(value.data);
 
-      if (!favouritesModel!.status!) {
-        favourites[productId] = !favourites[productId]!; // Revert change
-        emit(FavoritesErrorState(favouritesModel!.message!));
-      } else {
-        emit(FavoritesSuccessState());
-      }
-
-    },).catchError((error) {
+        if (!favouritesModel!.status!) {
+          favourites[productId] = !favourites[productId]!; // Revert change
+          emit(FavoritesErrorState(favouritesModel!.message!));
+        } else {
+          emit(FavoritesSuccessState());
+        }
+      },
+    ).catchError((error) {
       favourites[productId] = !favourites[productId]!; // Revert on error
       emit(FavoritesErrorState(error.toString()));
+    });
+  }
+
+  ProfileModel? profileModel;
+
+  void getProfileData() {
+    emit(ProfileLoadingState());
+    DioHelper.getData(path: PROFILE, token: token).then(
+      (value) {
+        profileModel = ProfileModel.fromJson(value.data);
+        emit(ProfileSuccessState());
+      },
+    ).catchError((error) {
+      emit(ProfileErrorState(error.toString()));
+    });
+  }
+
+  UpdateProfileModel? updateProfileModel;
+
+  var infoError = false;
+
+  void updateProfileData({
+    required String name,
+    required String email,
+    required String phone
+  }) {
+
+    emit(UpdateProfileLoadingState());
+
+    DioHelper.putData(
+      path: UPDATE_PROFILE,
+      token: token,
+      data: {
+        "name": name,
+        "phone": phone,
+        "email": email
+      },
+      lang: 'en',
+    ).then(
+      (value) {
+        updateProfileModel = UpdateProfileModel.fromJson(value.data);
+        emit(FavoritesSuccessState());
+      },
+    ).catchError((error) {
+      emit(ProfileErrorState(error.toString()));
+      print("THE ERROR --------------------------> $error");
     });
   }
 }

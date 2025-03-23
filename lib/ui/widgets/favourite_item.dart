@@ -9,7 +9,7 @@ class FavoriteItem extends StatelessWidget {
 
   final product;
 
-  FavoriteItem({this.product});
+  const FavoriteItem({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class FavoriteItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 150,
                         child: Text(
                           '${product.name}',
