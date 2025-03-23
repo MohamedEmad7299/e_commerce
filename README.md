@@ -4,11 +4,11 @@ Welcome to the **Flutter E-Commerce App** – a modern, feature-rich shopping ap
 
 ## 📸 Screenshots
 
-[1](./assets/images/1.jpg)
-[2](./assets/images/2.jpg)
-[3](./assets/images/3.jpg)
-[4](./assets/images/4.jpg)
-[5](./assets/images/5.jpg)
+![1](./assets/images/1.jpg)
+![2](./assets/images/2.jpg)
+![3](./assets/images/3.jpg)
+![4](./assets/images/4.jpg)
+![5](./assets/images/5.jpg)
 
 ## 🚀 Features
 
