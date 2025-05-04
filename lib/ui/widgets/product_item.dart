@@ -1,117 +1,140 @@
-
-
-import 'package:e_commerce/cubit/home_states.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../cubit/cubit.dart';
-import '../style/colors.dart';
-import 'components.dart';
+import 'package:intl/intl.dart';
 
 class ProductItem extends StatelessWidget {
 
-  final product;
+  final String imageUrl;
+  final String productName;
+  final dynamic productReview;
+  final dynamic productPrice;
+  final VoidCallback onClickFavButton;
+  final VoidCallback onClickItem;
+  final bool isLoading;
+  final bool isFavourite;
 
-  ProductItem(this.product);
+  const ProductItem({
+    super.key,
+    required this.imageUrl,
+    this.productName = "No Specified Name",
+    this.productReview = "0",
+    this.productPrice = 0,
+    required this.onClickFavButton,
+    required this.onClickItem,
+    required this.isLoading,
+    required this.isFavourite,
+  });
 
   @override
   Widget build(BuildContext context) {
 
-    return BlocConsumer<HomeCubit,HomeState>(
-      listener: (context, state) {
+    final numberFormat = NumberFormat.decimalPattern('en_US');
 
-        var cubit = HomeCubit.get(context);
-
-        if (state is FavoritesErrorState && !cubit.errorShown) {
-          toast(msg: state.error);
-          cubit.setErrorShown(true); // Mark error as shown
-        }
-      },
-      builder: (context, state) {
-
-        var cubit = HomeCubit.get(context);
-
-        return Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: onClickItem,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        margin: const EdgeInsets.all(8),
+        elevation: 2,
+        child: Container(
+          height: 240,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.deepPurple),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Stack(
             children: [
-              Expanded(
-                child: Stack(
-                  alignment: AlignmentDirectional.bottomStart,
-                  children: [
-                    Image(
-                      image: NetworkImage('${product.image}'),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(16)),
+                    child: Image.network(
+                      imageUrl,
+                      height: 120,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
-                    if (product.discount != 0)
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        color: cabaret,
-                        child: Text(
-                          'DISCOUNT',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 4),
+                    child: Text(
+                      productName,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 2),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 70,
+                          child: Text(
+                            "EGP ${numberFormat.format(productPrice)}",
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                      )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                '${product.name}',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    '${product.price}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                        const SizedBox(width: 8),
+                        SizedBox(
+                          width: 70,
+                          child: Text(
+                            "EGP ${numberFormat.format(productPrice + (productPrice / 3))}",
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.deepPurple,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  if (product.discount != 0)
-                    Text(
-                      '${product.oldPrice}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                  Spacer(),
-                  IconButton(
-                    onPressed: () {
-                      cubit.updateFavourites(product.id);
-                    },
-                    icon: Icon(
-                      cubit.favourites[product.id]! ? Icons.favorite : Icons.favorite_border,
-                      color: cabaret,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 4),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Review ($productReview)",
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                        const Icon(Icons.star, size: 18, color: Colors.amber),
+                      ],
                     ),
                   ),
                 ],
               ),
+              Positioned(
+                right: 8,
+                top: 8,
+                child: IconButton(
+                  icon: Icon(
+                    isFavourite ? Icons.favorite : Icons.favorite_border,
+                    color: isFavourite ? Colors.deepPurple : Colors.grey,
+                    size: 28,
+                  ),
+                  onPressed: onClickFavButton,
+                ),
+              )
             ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

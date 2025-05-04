@@ -1,9 +1,12 @@
-import 'package:e_commerce/shared/funs.dart';
+
+import 'package:e_commerce/di/service_locator.dart';
+import 'package:e_commerce/shared/navigation_helper.dart';
 import 'package:e_commerce/ui/login/login_screen.dart';
-import 'package:e_commerce/ui/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../data/cache_helper/cache_helper.dart';
 
 Widget onBoardingPage(OnBoardingModel onBoardingModel) {
   return Container(
@@ -23,7 +26,7 @@ Widget onBoardingPage(OnBoardingModel onBoardingModel) {
         ),
         Text(
           onBoardingModel.title,
-          style: TextStyle(fontSize: 24, color: cabaret),
+          style: TextStyle(fontSize: 24, color: Colors.deepPurple),
         ),
         SizedBox(
           height: 8,
@@ -76,16 +79,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final cacheHelper = getIt<CacheHelper>();
+
     return Scaffold(
         appBar: AppBar(
           actions: [
             TextButton(
               onPressed: () {
-                onSkipBoarding(context, LoginScreen());
+                onSkipBoarding(context, LoginScreen(),cacheHelper);
               },
               child: Text(
                 'Skip',
-                style: TextStyle(color: cabaret, fontSize: 18),
+                style: TextStyle(color: Colors.deepPurple, fontSize: 18),
               ),
             )
           ],
@@ -120,7 +126,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   SmoothPageIndicator(
                       effect: ExpandingDotsEffect(
                           dotColor: Colors.grey,
-                          activeDotColor: cabaret,
+                          activeDotColor: Colors.deepPurple,
                           dotHeight: 8,
                           dotWidth: 8),
                       controller: boardController,
@@ -129,13 +135,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   FloatingActionButton(
                     onPressed: () {
                       if (isLast) {
-                        onSkipBoarding(context, LoginScreen());
+                        onSkipBoarding(context, LoginScreen(),cacheHelper);
                       }
                       boardController.nextPage(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeIn);
                     },
-                    backgroundColor: cabaret,
+                    backgroundColor: Colors.deepPurple,
                     child: Icon(
                         color: Colors.white,
                         size: 32,

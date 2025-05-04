@@ -1,103 +1,105 @@
-import 'package:e_commerce/cubit/cubit.dart';
-import 'package:e_commerce/cubit/home_states.dart';
+import 'package:e_commerce/network/models/products_models/Product.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
-import '../style/colors.dart';
+class FavouriteItem extends StatelessWidget {
 
-class FavoriteItem extends StatelessWidget {
+  final Product product;
+  final VoidCallback onClickFavButton;
+  final VoidCallback onClickItem;
 
-  final product;
-
-  const FavoriteItem({super.key, this.product});
+  const FavouriteItem({
+    super.key,
+    required this.product,
+    required this.onClickFavButton,
+    required this.onClickItem,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
-      builder: (context, state) {
 
-        var cubit = HomeCubit.get(context);
 
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    final formattedPrice = NumberFormat.decimalPattern('en_US').format(product.price);
+    final formattedOldPrice = NumberFormat.decimalPattern('en_US').format(product.price + (product.price/3));
+
+    return InkWell(
+      onTap: onClickItem,
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: Colors.deepPurple),
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        child: SizedBox(
+          height: 140,
           child: Row(
             children: [
-              Stack(
-                alignment: AlignmentDirectional.bottomStart,
-                children: [
-                  Image(
-                    image: NetworkImage(
-                        '${product.image}'),
-                    width: 150,
-                    height: 150,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  width: 140,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.deepPurple),
+                  ),
+                  child: Image.network(
+                    product.thumbnail != null
+                        ? product.thumbnail!
+                        : '',
                     fit: BoxFit.cover,
                   ),
-                  if (product.discount != 0)
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      color: cabaret,
-                      child: Text(
-                        'DISCOUNT',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                ],
+                ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 8),
               Expanded(
-                child: SizedBox(
-                  height: 150,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8, top: 8, bottom: 8),
+                  child: Stack(
                     children: [
-                      SizedBox(
-                        width: 150,
-                        child: Text(
-                          '${product.name}',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Spacer(),
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${product.price}',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blueAccent,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          if (product.discount != 0)
-                            Text(
-                              '${product.oldPrice}',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
+                          SizedBox(
+                            width: 150,
+                            child: Text(
+                              product.title != null ? product.title! : 'No Name',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.deepPurple,
                               ),
                             ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {
-                              cubit.updateFavourites(product.id);
-                            },
-                            icon: Icon(
-                              cubit.favourites[product.id]! ? Icons.favorite : Icons.favorite_border,
-                              color: cabaret,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'EGP $formattedPrice',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.deepPurple,
+                            ),
+                          ),
+                          Text(
+                            'EGP $formattedOldPrice',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Colors.deepPurple,
+                              decoration: TextDecoration.lineThrough,
                             ),
                           ),
                         ],
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: IconButton(
+                          onPressed: onClickFavButton,
+                          icon: const Icon(Icons.favorite),
+                          color: Colors.deepPurple,
+                        ),
                       ),
                     ],
                   ),
@@ -105,9 +107,8 @@ class FavoriteItem extends StatelessWidget {
               )
             ],
           ),
-        );
-      },
-      listener: (context, state) {},
+        ),
+      ),
     );
   }
 }

@@ -1,23 +1,21 @@
-import 'package:e_commerce/ui/style/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 ThemeData lightTheme() {
   return ThemeData(
-    indicatorColor: cabaret,
+    indicatorColor: Colors.deepPurple,
     progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: cabaret,
-        linearTrackColor: cabaret75
+        color: Colors.deepPurple,
     ),
     textSelectionTheme: TextSelectionThemeData(
-      selectionColor: cabaret75,
-      selectionHandleColor: cabaret,
+      selectionHandleColor: Colors.deepPurple,
     ),
     iconTheme: IconThemeData(
-        color: cabaret
+        color: Colors.deepPurple
     ),
     inputDecorationTheme: InputDecorationTheme(
-      prefixIconColor: cabaret,
+      prefixIconColor: Colors.deepPurple,
       labelStyle: TextStyle(
           color: Colors.black
       ),
@@ -41,52 +39,5 @@ ThemeData lightTheme() {
       backgroundColor: Colors.white,
       selectedItemColor: Colors.black,
     ),
-  );
-}
-
-
-ThemeData darkTheme() {
-  return ThemeData(
-      iconTheme: IconThemeData(
-          color: Colors.white
-      ),
-      textSelectionTheme: TextSelectionThemeData(
-        cursorColor: Colors.white,
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        prefixIconColor: Colors.white,
-        suffixIconColor: Colors.white,
-        labelStyle: TextStyle(
-            color: Colors.white
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              width: 2.0,
-              color: Colors.white
-          ),
-        ),
-      ),
-      progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.white),
-      scaffoldBackgroundColor: Colors.black,
-      primaryColor: Colors.black,
-      appBarTheme: AppBarTheme(
-          color: Colors.black,
-          elevation: 0,
-          shadowColor: Colors.black,
-          surfaceTintColor: Colors.black,
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.black,
-              statusBarIconBrightness: Brightness.light),
-          iconTheme: IconThemeData(color: Colors.white, size: 30)),
-      textTheme: TextTheme(
-        bodyLarge: TextStyle(color: Colors.white),
-        bodyMedium: TextStyle(color: Colors.white),
-      ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.white,
-      )
   );
 }

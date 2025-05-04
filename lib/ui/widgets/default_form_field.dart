@@ -1,6 +1,5 @@
 
 
-import 'package:e_commerce/ui/style/colors.dart';
 import 'package:flutter/material.dart';
 
 Widget defaultFormField({
@@ -40,7 +39,7 @@ Widget defaultFormField({
       ),
       prefixIcon: Icon(
           prefixIcon,
-        color: cabaret,
+        color: Colors.deepPurple,
       ),
       border: OutlineInputBorder(
 

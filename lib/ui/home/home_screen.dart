@@ -1,15 +1,13 @@
 
 
-import 'package:e_commerce/ui/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../cubit/cubit.dart';
-import '../../cubit/home_states.dart';
-import '../../shared/funs.dart';
-import '../search/search_screen.dart';
+import 'cubit/cubit.dart';
+import 'cubit/home_states.dart';
 
 class HomeScreen extends StatelessWidget {
+
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,31 +18,8 @@ class HomeScreen extends StatelessWidget {
         var cubit = HomeCubit.get(context);
         return Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            actions: [
-              IconButton(
-                onPressed: () {
-                  navigateTo(context, SearchScreen());
-                },
-                icon: Icon(
-                  size: 32,
-                  Icons.search,
-                  color: cabaret,
-                ),
-              ),
-              // IconButton(
-              //   onPressed: () {
-              //     cubit.changeThemeMode();
-              //   },
-              //   icon: Icon(
-              //       Icons.brightness_4_outlined
-              //   ),
-              // ),
-            ],
-          ),
           bottomNavigationBar: BottomNavigationBar(
-            // backgroundColor: Colors.white,
-            selectedItemColor: cabaret,
+            selectedItemColor: Colors.deepPurple,
             type: BottomNavigationBarType.fixed,
             currentIndex: cubit.currentIndex,
             onTap: (index) {
@@ -58,19 +33,14 @@ class HomeScreen extends StatelessWidget {
                   label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.category_outlined,
+                    Icons.shopping_cart,
                   ),
-                  label: 'Categories'),
+                  label: 'Cart'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.favorite,
                   ),
-                  label: 'Favorite'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.settings,
-                  ),
-                  label: 'Settings')
+                  label: 'Favorites')
             ],
           ),
           body: cubit.screens[cubit.currentIndex],
