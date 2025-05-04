@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   final
   Widget startScreen;
 
-  const MyApp({required this.startScreen});
+  const MyApp({super.key, required this.startScreen});
 
   @override
   Widget build(BuildContext context) {
