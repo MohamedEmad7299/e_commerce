@@ -12,17 +12,12 @@ This project is a submission for **Phase 2** of the internship program. The goal
 - **Index Products**: List all available products with details
 - **View Product**: Display individual product details
 
-### 🧺 Cart Functionality
+### 🧺 Cart Functionality & WishList
 - Add products to cart
 - Remove products from cart
 - Edit product quantities in cart
-
-### ✨ Optional Features (Implemented/Planned)
-- [x] Wishlist: Save favorite products
-- [x] Search & Filter: Improve user experience
-- [ ] Order Summary / Checkout
-
----
+- Wishlist: Save favorite products
+- Search & Filter: Improve user experience
 
 ## 🧰 Tech Stack
 
