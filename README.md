@@ -1,25 +1,36 @@
-# 🛍️ Flutter E-Commerce App
+# 🛍️ E-Commerce App – Internship Challenge (Phase 2)
 
-Welcome to the **Flutter E-Commerce App** – a modern, feature-rich shopping application built using Flutter. This app provides a seamless shopping experience with features like product browsing.
-
-## 📸 Screenshots
-
-![1](./assets/images/1.jpg)
-![2](./assets/images/2.jpg)
-![3](./assets/images/3.jpg)
-![4](./assets/images/4.jpg)
-![5](./assets/images/5.jpg)
+This project is a submission for **Phase 2** of the internship program. The goal was to build a fully functional e-commerce app in one week, showcasing technical skills and clean architecture.
 
 ## 🚀 Features
 
-- 🛒 **Product Listing & Details** – Browse products with descriptions and images.
-- 🔍 **Search & Filter** – Easily find products with smart search.
-- 🔐 **User Authentication** – Sign up, login, and manage profiles.
-- 🎨 **Beautiful UI** – Designed using Flutter with Material and Cupertino widgets.
+### 🔐 User Authentication
+- JWT-based login
+- Secure session handling
 
-## 🏗️ Tech Stack
+### 🛒 Product Management
+- **Index Products**: List all available products with details
+- **View Product**: Display individual product details
 
-- **Flutter** (Dart) – Frontend UI development
-- **Bloc** – State management
-- **Dio** – API integration
-- **SharedPreferences** – Local storage
+### 🧺 Cart Functionality
+- Add products to cart
+- Remove products from cart
+- Edit product quantities in cart
+
+### ✨ Optional Features (Implemented/Planned)
+- [x] Wishlist: Save favorite products
+- [x] Search & Filter: Improve user experience
+- [ ] Order Summary / Checkout
+
+---
+
+## 🧰 Tech Stack
+
+- **Flutter** with Clean Architecture
+- **Dio** – HTTP requests
+- **Get It** – Dependency Injection
+- **BLoC** – State Management (or [Stacked](https://pub.dev/packages/stacked) if used)
+
+
+## Preview : https://youtube.com/shorts/Co9c0oQqs3I?si=uO57UvFu2Wr2cLBy
+
